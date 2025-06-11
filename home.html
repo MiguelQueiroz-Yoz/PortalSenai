@@ -1,0 +1,70 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Aluno - SENAI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div style="text-align: right; padding: 10px;">
+      <button id="theme-toggle" style="
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--text-default);
+      " title="Alternar Tema">
+        🌙
+      </button>
+    </div>
+
+    <div class="dashboard">
+        <header>
+            <img class="logo" src="img/logo-senai.png" alt="Logo SENAI">
+            <h1>Bem-vindo, aluno!</h1>
+            <button onclick="logout()">Sair</button>
+        </header>
+
+        <section class="painel">
+            <div class="card">
+                <h3>Matérias</h3>
+                <ul>
+                    <li>Matemática</li>
+                    <li>Física</li>
+                    <li>Química</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Cursos</h3>
+                <ul>
+                    <li>Curso Web</li>
+                    <li>Curso Mecânica</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Atividades Pendentes</h3>
+                <ul>
+                    <li>Trabalho de Matemática</li>
+                    <li>Projeto de Química</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Notas</h3>
+                <ul>
+                    <li>Lógica: 9,0</li>
+                    <li>BD: 6,5</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function logout() {
+            window.location.href = "index.html";
+        }
+    </script>
+    <script src="scripts.js"></script>
+</body>
+</html>

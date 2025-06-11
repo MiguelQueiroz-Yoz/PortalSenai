@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NETNÚCLEO - HORTO</title>
+  <style>
+    .header {
+      background: linear-gradient(to right, #e6e6e6, #cccccc);
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #0a263d;
+      position: relative;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    .spacer {
+      flex: 1;
+    }
+
+
+    .title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #1b1b1b;
+      text-shadow: 1px 1px 2px #ccc;
+    }
+
+    .buttons {
+      margin-top: 10px;
+      padding-bottom: 10px;
+      flex-direction: right;
+      gap: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+    }
+
+    button {
+      width: 150px;
+      padding: 10px;
+      background-color: #e6e6e6;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #d4d4d4;
+    }
+
+    .content {
+      width: 320px;
+      margin: 60px auto;
+      background-color: var(--bg-card);
+      padding: 30px 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    :root {
+      --bg-page: #f1f1f1;
+      --bg-card: #ffffff;
+      --text-default: #333333;
+      --text-secondary: #555555;
+      --input-bg: #ffffff;
+      --input-border: #cccccc;
+      --button-bg: #0066cc;
+      --button-text: #ffffff;
+      --link-color: #0066cc;
+      --progress-bg: #dddddd;
+      --progress-fill: #0066cc;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #1e1e1e;
+      --bg-card: #2c2c2c;
+      --text-default: #e5e5e5;
+      --text-secondary: #cccccc;
+      --input-bg: #3a3a3a;
+      --input-border: #555555;
+      --button-bg: #004a99;
+      --button-text: #ffffff;
+      --link-color: #66aaff;
+      --progress-bg: #444444;
+      --progress-fill: #66aaff;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      font-family: Arial, sans-serif;
+      color: var(--text-default);
+      margin: 0;
+      padding: 0;
+    }
+
+
+    #loginForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="img/logo-senai.png" alt="SESI SENAI">
+    </div>
+    <div class="spacer"></div> <!-- Elemento centralizador -->
+    <div class="title">NETNÚCLEO - HORTO</div>
+    <div class="spacer"></div>
+  </div>
+
+
+  <div style="text-align: right; padding: 10px;">
+    <button id="theme-toggle" style="
+          background: none;
+          border: none;
+          font-size: 20px;
+          cursor: pointer;
+          color: var(--text-default);
+        " title="Alternar Tema">
+      🌙
+    </button>
+  </div>
+
+  <div style="padding-top: 10px;">
+    <form id="loginForm">
+      <select id="unidade" name="Selecione a Unidade">
+        <option value="">- Selecione -</option>
+        <option value="unidade1">SENAI HORTO</option>
+      </select>
+  </div>
+
+  <div class="content">
+
+    <p>Acesse em dispositivos móveis através dos botões:</p>
+    <div class="buttons">
+      <button onclick="alert('Consulta Aula')">Consulta Aula</button>
+      <button onclick="alert('Consulta Instrutor')">Consulta Instrutor</button>
+      <button onclick="alert('Consulta Sala')">Consulta Sala</button>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!-- recuperar.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recuperar Senha</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <!-- Dark Mode Toggle -->
+  <div style="text-align: right; padding: 10px;">
+    <button id="theme-toggle" style="
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-default);
+    " title="Alternar Tema">
+      🌙
+    </button>
+  </div>
+
+  <div class="login-container">
+    <h2>Recuperar Senha</h2>
+
+    <!-- Barra de progresso -->
+    <div class="progress-container">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+
+    <!-- ========== ETAPA 1: Enviar email ========== -->
+    <div id="etapa-1">
+      <label for="emailRecuperar">Digite seu e-mail:</label>
+      <input type="email" id="emailRecuperar" placeholder="seu@email"/>
+      <button id="btn-enviar-codigo">Enviar código</button>
+    </div>
+
+    <!-- ========== ETAPA 2: Verificar código ========== -->
+    <div id="etapa-2" style="display: none;">
+      <label for="codigoVerificar">Digite o código enviado para seu e-mail:</label>
+      <input type="text" id="codigoVerificar" placeholder="------" maxlength="6"/>
+      <button id="btn-verificar-codigo">Verificar Código</button>
+      <p id="msg-codigo-invalido" style="display: none; color: red; font-size: 14px;">
+        Código inválido. Tente novamente.
+      </p>
+    </div>
+
+    <!-- ========== ETAPA 3: Definir nova senha + copiar código ========== -->
+    <div id="etapa-3" style="display: none;">
+      <label for="novaSenha">Defina sua nova senha:</label>
+      <input type="password" id="novaSenha" placeholder="Nova senha"/>
+      <p id="forca-senha" style="font-size: 14px; margin-top: -12px; margin-bottom: 12px;">
+        Força da senha: <span id="texto-forca-senha">-</span>
+      </p>
+      <button id="btn-alterar-senha">Alterar Senha</button>
+
+      <!-- Bloco de código gerado + botão copiar -->
+      <div id="etapa-codigo-gerado" style="margin-top: 16px; text-align: center;">
+      
+        <p id="msg-codigo-copiado" style="
+          display: none;
+          color: green;
+          font-size: 14px;
+          margin-top: 4px;
+        ">
+          Código copiado!
+        </p>
+      </div>
+
+      <p id="msg-sucesso" style="display: none; color: green; font-size: 14px; text-align: center; margin-top: 12px;">
+        Senha alterada com sucesso!
+      </p>
+    </div>
+
+    <p style="text-align: center; margin-top: 16px;">
+      <a href="index.html">Voltar ao login</a>
+    </p>
+  </div>
+  
+</body>
+</html>
