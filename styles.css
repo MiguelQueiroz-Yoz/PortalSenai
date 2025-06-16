@@ -27,21 +27,13 @@
   --progress-fill: #66aaff;
 }
 
+/* Base styles */
 body {
   background-color: var(--bg-page);
   font-family: Arial, sans-serif;
   color: var(--text-default);
   margin: 0;
   padding: 0;
-}
-
-.login-container {
-  width: 320px;
-  margin: 60px auto;
-  background-color: var(--bg-card);
-  padding: 30px 20px;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 input[type="text"],
@@ -96,6 +88,16 @@ a:hover {
   color: var(--text-secondary);
 }
 
+/* Common containers and elements */
+.login-container {
+  width: 320px;
+  margin: 60px auto;
+  background-color: var(--bg-card);
+  padding: 30px 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .progress-container {
   width: 100%;
   background-color: var(--progress-bg);
@@ -132,10 +134,12 @@ a:hover {
 
 .dashboard {
   width: 90%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 40px auto;
 }
 
+/* General header for home.html (student dashboard) - Se você usa um header diferente lá, mantenha.
+   Caso contrário, esta seção pode ser removida se o professor-header for universal. */
 header {
   display: flex;
   align-items: center;
@@ -173,9 +177,290 @@ header button:hover {
   gap: 16px;
 }
 
+/* Logo used in login/cadastro */
 .logo {
-  width: 10%;
-  height: 200px;
+  width: auto;
+  height: auto;
+  display: block;
+  padding-left: 0; /* Removendo qualquer padding extra que possa ter */
+}
+
+/* --- Specific styles for Professor Dashboard (professor.html) --- */
+
+.dashboard-container {
+ 
+  /* Pode adicionar max-width e margin: auto aqui se quiser centralizar todo o painel */
+}
+
+/* Header principal do professor */
+.professor-header {
+  background: linear-gradient(to right, #e6e6e6, #cccccc);
+  padding: 10px 20px;
+  display: flex;
   align-items: center;
-  padding-left: 60px;
+  justify-content: space-between; /* Espaço entre as 3 colunas (left, center, right) */
+  border-bottom: 1px solid #0a263d;
+  box-sizing: border-box;
+  flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas pequenas */
+  position: relative; /* Para posicionar elementos absolutamente se necessário (ex: título) */
+  min-height: 80px; /* Garante altura mínima para acomodar a logo */
+}
+
+/* Coluna Esquerda: Logo */
+.header-left {
+  flex-shrink: 0; /* Não permite que encolha */
+  padding-right: 20px; /* Espaço entre a logo e o centro */
+}
+
+.professor-header .logo img {
+  height: 80px; /* Tamanho da logo maior */
+  width: auto;
+}
+
+/* Coluna Central: Título e Navegação */
+.header-center {
+  display: flex;
+  flex-direction: column; /* Empilha título e navegação */
+  align-items: center; /* Centraliza Título e Navegação horizontalmente */
+  flex-grow: 1; /* Permite que ocupe o espaço central */
+  text-align: center; /* Centraliza o texto do título */
+  margin: 0 auto; /* Ajuda a centralizar em alguns cenários, embora flex-grow já ajude */
+  padding: 0 10px; /* Pequeno padding para evitar que cole nas laterais em telas menores */
+}
+
+
+/* Estilos para o título dentro do cabeçalho do professor */
+.professor-header .title {
+  font-size: 28px; /* Aumentado para dar mais destaque */
+  font-weight: bold;
+  color: #1b1b1b;
+  text-shadow: 1px 1px 2px #ccc;
+  white-space: nowrap; /* Evita quebra de linha no título */
+  margin-bottom: 10px; /* Espaço entre o título e a navegação */
+}
+
+/* Coluna Direita: Botão Dark Mode */
+.header-right {
+  flex-shrink: 0; /* Não permite que encolha */
+  padding-left: 20px; /* Espaço entre o centro e o botão de tema */
+}
+
+/* Dark Mode para o cabeçalho do professor */
+[data-theme="dark"] .professor-header {
+  background: linear-gradient(to right, #2c2c2c, #1e1e1e);
+  border-bottom: 1px solid #555555;
+}
+
+[data-theme="dark"] .professor-header .title {
+  color: #e5e5e5;
+  text-shadow: none;
+}
+
+/* Dark Mode Toggle Button (geral para todas as páginas) */
+.theme-toggle-button {
+  background: none;
+  border: none;
+  font-size: 24px; /* Aumentado um pouco para visibilidade */
+  cursor: pointer;
+  color: var(--text-default);
+  padding: 0;
+}
+
+.theme-toggle-button:hover {
+  opacity: 0.8;
+}
+
+/* Navegação Principal */
+.main-nav {
+  width: 100%; /* Ocupa a largura total do header-center */
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centraliza as opções de menu */
+  gap: 15px; /* Espaçamento entre os itens do menu */
+}
+
+.main-nav li {
+  position: relative;
+}
+
+.main-nav ul li a {
+  color: var(--text-default);
+  text-decoration: none;
+  padding: 8px 12px;
+  display: block;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.main-nav ul li a:hover,
+.main-nav .dropbtn:hover {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+/* Conteúdo do Dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--bg-card);
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+  border-radius: 6px;
+  top: 100%;
+  left: 50%; /* Centraliza o dropdown em relação ao seu pai */
+  transform: translateX(-50%); /* Ajusta para centralizar perfeitamente */
+  padding: 8px 0;
+  border: 1px solid var(--input-border);
+}
+
+.dropdown-content a {
+  color: var(--text-default);
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Área de conteúdo para Professor Dashboard */
+.content.center-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.center-content p {
+  margin-bottom: 15px;
+  color: var(--text-default);
+}
+
+.mobile-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mobile-buttons button {
+  width: 200px;
+  padding: 12px 20px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.mobile-buttons button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* --- Responsive Adjustments --- */
+
+/* Para telas menores que 900px, ajusta o cabeçalho para empilhar */
+@media (max-width: 900px) {
+  .professor-header {
+    flex-direction: column; /* Empilha os blocos (left, center, right) */
+    align-items: center; /* Centraliza todos os blocos quando empilhados */
+    padding: 15px 10px;
+    justify-content: center; /* No modo coluna, centraliza o conteúdo */
+  }
+
+  .header-left,
+  .header-center,
+  .header-right {
+    width: 100%; /* Ocupa a largura total */
+    padding: 0; /* Remove padding lateral que possa causar desalinhamento */
+    text-align: center; /* Centraliza o texto/conteúdo interno */
+  }
+
+  .header-left {
+    order: 1; /* Ordem 1: logo primeiro */
+    margin-bottom: 10px; /* Espaço abaixo da logo */
+  }
+
+  .header-center {
+    order: 2; /* Ordem 2: título e navegação em seguida */
+    margin-bottom: 10px; /* Espaço abaixo da navegação */
+  }
+
+  .header-right {
+    order: 3; /* Ordem 3: botão de tema por último */
+    margin-top: 0; /* Remove qualquer margem superior indesejada */
+  }
+
+  .professor-header .logo img {
+    margin: 0 auto; /* Centraliza a logo quando em coluna */
+  }
+
+  .professor-header .title {
+    font-size: 22px; /* Reduz um pouco o tamanho do título em mobile */
+  }
+
+  .main-nav ul {
+    flex-direction: column; /* Empilha os links de navegação */
+    align-items: center; /* Centraliza os links quando empilhados */
+    gap: 5px; /* Espaçamento reduzido */
+  }
+
+  .main-nav ul li {
+    width: 100%; /* Ocupa a largura total para melhor clique */
+    text-align: center;
+  }
+
+  .main-nav ul li a {
+    padding: 10px 0; /* Aumenta o padding para melhor toque */
+  }
+
+  .dropdown-content {
+    position: static; /* O dropdown não flutua mais, fica embutido */
+    box-shadow: none;
+    background-color: transparent; /* Fundo transparente para se misturar */
+    width: 100%;
+    border: none;
+    border-top: 1px solid var(--input-border); /* Linha divisória sutil */
+    border-radius: 0;
+    padding: 5px 0;
+  }
+
+  .dropdown-content a {
+    padding-left: 0; /* Remove identação extra */
+    text-align: center; /* Centraliza texto do sub-menu */
+  }
+
+  .theme-toggle-button {
+    margin: 0 auto; /* Centraliza o botão de tema no mobile */
+    font-size: 20px; /* Reduz um pouco o tamanho em mobile */
+  }
+
+  .content.center-content {
+    margin: 20px 10px;
+  }
 }
