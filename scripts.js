@@ -109,312 +109,402 @@ if (loginForm) {
   }
 }
 
-// ==================== CADASTRO ====================
-const cadastroForm = document.getElementById("cadastroForm");
 
-if (cadastroForm) {
-  cadastroForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+// ==================== CADASTRO DE ÁREAS ====================
+document.addEventListener('DOMContentLoaded', () => {
+  const areaForm = document.getElementById('areaForm');
+  const areaNomeInput = document.getElementById('areaNome');
+  const areasTableBody = document.querySelector('#areasTable tbody');
+  const btnSalvarArea = document.getElementById('btnSalvarArea');
+  const btnCancelarEdicao = document.getElementById('btnCancelarEdicao');
+  const searchInput = document.getElementById('searchInput');
+  const searchButton = document.getElementById('searchButton');
+  const noAreasMessage = document.getElementById('noAreasMessage');
 
-    const nomeCompleto = document.getElementById("nomeCompleto").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const ddd = document.getElementById("ddd").value.trim();
-    const telefone = document.getElementById("telefone").value.trim();
-    const newUsername = document.getElementById("newUsername").value.trim();
-    const newPassword = document.getElementById("newPassword").value.trim();
-    const confirmPassword = document.getElementById("confirmPassword").value.trim();
-    const cadastroMessage = document.getElementById("cadastroMessage");
+  let areas = JSON.parse(localStorage.getItem('areas')) || [];
+  let editingAreaId = null; // Variável para armazenar o ID da área sendo editada
 
-    cadastroMessage.textContent = "";
+  // Função para gerar um ID único
+  function generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  }
 
-    if (newPassword !== confirmPassword) {
-      cadastroMessage.textContent = "As senhas não coincidem!";
-      cadastroMessage.style.color = "red";
-      return;
-    }
+  // Função para salvar as áreas no localStorage
+  function saveAreas() {
+    localStorage.setItem('areas', JSON.stringify(areas));
+  }
 
-    // Validar formato de e-mail básico
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      cadastroMessage.textContent = "Por favor, insira um e-mail válido.";
-      cadastroMessage.style.color = "red";
-      return;
-    }
-
-    // Validar DDD (apenas números, 2 dígitos)
-    const dddRegex = /^\d{2}$/;
-    if (!dddRegex.test(ddd)) {
-      cadastroMessage.textContent = "DDD inválido. Deve conter 2 dígitos numéricos.";
-      cadastroMessage.style.color = "red";
-      return;
-    }
-
-    // Validar Telefone (apenas números, 9 dígitos)
-    const telefoneRegex = /^\d{9}$/;
-    if (!telefoneRegex.test(telefone)) {
-      cadastroMessage.textContent = "Telefone inválido. Deve conter 9 dígitos numéricos.";
-      cadastroMessage.style.color = "red";
-      return;
-    }
-
-    // Carregar contas existentes
-    let contas = JSON.parse(localStorage.getItem("contas")) || [];
-
-    // Verificar se o nome de usuário ou e-mail já existem
-    const usuarioExistente = contas.some(
-      (conta) => conta.username === newUsername || conta.email === email
+  // Função para renderizar a tabela de áreas
+  function renderAreas(filter = '') {
+    areasTableBody.innerHTML = ''; // Limpa a tabela antes de renderizar
+    const filteredAreas = areas.filter(area =>
+      area.nome.toLowerCase().includes(filter.toLowerCase())
     );
 
-    if (usuarioExistente) {
-      cadastroMessage.textContent = "Nome de usuário ou e-mail já cadastrados.";
-      cadastroMessage.style.color = "red";
-      return;
-    }
-
-    // Adicionar nova conta (por padrão, vamos adicionar como "aluno" aqui)
-    contas.push({
-      nomeCompleto: nomeCompleto,
-      email: email,
-      ddd: ddd,
-      telefone: telefone,
-      username: newUsername,
-      senha: newPassword,
-      tipo: 'aluno' // Pode ser 'aluno' ou 'professor'
-    });
-    localStorage.setItem("contas", JSON.stringify(contas));
-
-    cadastroMessage.textContent = "Cadastro realizado com sucesso! Redirecionando para o login...";
-    cadastroMessage.style.color = "green";
-
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 2000);
-  });
-
-  // Toggle de visibilidade da senha no cadastro
-  const toggleNewPassword = document.getElementById("toggleNewPassword");
-  const newPasswordInput = document.getElementById("newPassword");
-  const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
-  const confirmPasswordInput = document.getElementById("confirmPassword");
-
-  if (toggleNewPassword && newPasswordInput) {
-    toggleNewPassword.addEventListener("click", function () {
-      if (newPasswordInput.type === "password") {
-        newPasswordInput.type = "text";
-        toggleNewPassword.classList.remove("fa-eye");
-        toggleNewPassword.classList.add("fa-eye-slash");
-      } else {
-        newPasswordInput.type = "password";
-        toggleNewPassword.classList.remove("fa-eye-slash");
-        toggleNewPassword.classList.add("fa-eye");
-      }
-    });
-  }
-
-  if (toggleConfirmPassword && confirmPasswordInput) {
-    toggleConfirmPassword.addEventListener("click", function () {
-      if (confirmPasswordInput.type === "password") {
-        confirmPasswordInput.type = "text";
-        toggleConfirmPassword.classList.remove("fa-eye");
-        toggleConfirmPassword.classList.add("fa-eye-slash");
-      } else {
-        confirmPasswordInput.type = "password";
-        toggleConfirmPassword.classList.remove("fa-eye-slash");
-        toggleConfirmPassword.classList.add("fa-eye");
-      }
-    });
-  }
-
-  // Preenchimento de DDD
-  const inputDdd = document.getElementById("ddd");
-  const dddRegiaoSpan = document.getElementById("dddRegiao");
-
-  if (inputDdd) {
-    inputDdd.addEventListener("input", function() {
-      const ddd = this.value;
-      let regiao = "";
-
-      // Mapeamento simples de DDDs para regiões (exemplo)
-      switch (ddd) {
-        case "11": regiao = "São Paulo - SP"; break;
-        case "21": regiao = "Rio de Janeiro - RJ"; break;
-        case "31": regiao = "Belo Horizonte - MG"; break;
-        case "41": regiao = "Curitiba - PR"; break;
-        case "51": regiao = "Porto Alegre - RS"; break;
-        case "61": regiao = "Brasília - DF"; break;
-        case "71": regiao = "Salvador - BA"; break;
-        case "81": regiao = "Recife - PE"; break;
-        case "92": regiao = "Manaus - AM"; break;
-        default: regiao = ""; break;
-      }
-
-      if (regiao) {
-        dddRegiaoSpan.textContent = `Região: ${regiao}`;
-        dddRegiaoSpan.style.color = "var(--text-secondary)";
-      } else if (ddd.length === 2) {
-        dddRegiaoSpan.textContent = "DDD não reconhecido.";
-        dddRegiaoSpan.style.color = "orange";
-      } else {
-        dddRegiaoSpan.textContent = "";
-      }
-    });
-  }
-}
-
-// ==================== RECUPERAR SENHA ====================
-const etapa1 = document.getElementById("etapa-1");
-const etapa2 = document.getElementById("etapa-2");
-const etapa3 = document.getElementById("etapa-3");
-
-const inputEmailRecuperar = document.getElementById("emailRecuperar");
-const btnEnviarCodigo = document.getElementById("btn-enviar-codigo");
-const msgEmailInvalido = document.getElementById("msg-email-invalido");
-
-const inputCodigoVerificar = document.getElementById("codigoVerificar");
-const btnVerificarCodigo = document.getElementById("btn-verificar-codigo");
-const msgCodigoInvalido = document.getElementById("msg-codigo-invalido");
-
-const inputNovaSenha = document.getElementById("novaSenha");
-const forcaSenhaTexto = document.getElementById("texto-forca-senha");
-const btnAlterarSenha = document.getElementById("btn-alterar-senha");
-
-const progressFill = document.getElementById("progress-fill");
-
-let codigoGerado = "";
-let emailEmUso = ""; // Armazena o email para uso na etapa 3
-
-function setProgress(percentage) {
-  if (progressFill) {
-    progressFill.style.width = percentage + "%";
-  }
-}
-
-if (btnEnviarCodigo) {
-  btnEnviarCodigo.addEventListener("click", () => {
-    emailEmUso = inputEmailRecuperar.value.trim();
-    msgEmailInvalido.style.display = "none";
-
-    if (!emailEmUso) {
-      msgEmailInvalido.textContent = "Por favor, digite seu e-mail.";
-      msgEmailInvalido.style.display = "block";
-      return;
-    }
-
-    let contas = JSON.parse(localStorage.getItem("contas")) || [];
-    const usuarioExiste = contas.some(conta => conta.email.toLowerCase() === emailEmUso.toLowerCase());
-
-    if (!usuarioExiste) {
-      msgEmailInvalido.textContent = "E-mail não encontrado.";
-      msgEmailInvalido.style.display = "block";
-      return;
-    }
-
-    // Gerar um código de 6 dígitos
-    codigoGerado = Math.floor(100000 + Math.random() * 900000).toString();
-    console.log("Código de recuperação (simulado):", codigoGerado); // Apenas para fins de teste
-    alert("Código de recuperação enviado para " + emailEmUso + "\nCódigo: " + codigoGerado); // Em um sistema real, isso enviaria um e-mail
-
-    etapa1.style.display = "none";
-    etapa2.style.display = "block";
-    setProgress(50);
-  });
-}
-
-if (btnVerificarCodigo) {
-  btnVerificarCodigo.addEventListener("click", () => {
-    const codigoDigitado = inputCodigoVerificar.value.trim();
-    msgCodigoInvalido.style.display = "none";
-
-    if (codigoDigitado === codigoGerado) {
-      etapa2.style.display = "none";
-      etapa3.style.display = "block";
-      setProgress(100);
+    if (filteredAreas.length === 0) {
+      noAreasMessage.style.display = 'block';
+      areasTableBody.style.display = 'none'; // Esconde a tabela se não houver resultados
     } else {
-      msgCodigoInvalido.textContent = "Código inválido. Tente novamente.";
-      msgCodigoInvalido.style.display = "block";
+      noAreasMessage.style.display = 'none';
+      areasTableBody.style.display = ''; // Mostra a tabela
+      filteredAreas.forEach(area => {
+        const row = areasTableBody.insertRow();
+        row.dataset.id = area.id; // Armazena o ID na linha para fácil acesso
+
+        row.innerHTML = `
+                    <td>${area.id.substring(0, 5)}...</td> <td>${area.nome}</td>
+                    <td class="actions">
+                        <button class="edit-btn" data-id="${area.id}">Editar</button>
+                        <button class="delete-btn" data-id="${area.id}">Excluir</button>
+                    </td>
+                `;
+      });
     }
-  });
-}
+  }
 
-if (inputNovaSenha) {
-  inputNovaSenha.addEventListener("input", () => {
-    const senha = inputNovaSenha.value;
-    let forca = 0;
+  // Evento de submit do formulário
+  if (areaForm) {
+    areaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = areaNomeInput.value.trim();
 
-    if (senha.length >= 6) forca++;
-    if (senha.match(/[a-z]/)) forca++;
-    if (senha.match(/[A-Z]/)) forca++;
-    if (senha.match(/\d/)) forca++;
-    if (senha.match(/[^a-zA-Z0-9]/)) forca++;
-
-    let texto = "Muito Fraca";
-    let cor = "red";
-
-    if (forca >= 5) {
-      texto = "Forte";
-      cor = "green";
-    } else if (forca >= 3) {
-      texto = "Média";
-      cor = "orange";
-    } else if (forca >= 1) {
-      texto = "Fraca";
-      cor = "red";
-    }
-
-    forcaSenhaTexto.textContent = texto;
-    forcaSenhaTexto.style.color = cor;
-  });
-}
-
-if (btnAlterarSenha) {
-  btnAlterarSenha.addEventListener("click", () => {
-    const novaSenha = inputNovaSenha.value.trim();
-    const forcaAtual = forcaSenhaTexto.textContent.trim();
-    
-    if (!novaSenha) {
-      alert("Digite uma nova senha.");
-      return;
-    }
-    
-    if (forcaAtual !== "Forte") {
-      alert("A senha precisa ser forte para ser definida.");
-      return;
-    }
-    
-    let contas = JSON.parse(localStorage.getItem("contas")) || [];
-    contas = contas.map(c => {
-      if (c.email.toLowerCase() === emailEmUso.toLowerCase()) {
-        return { ...c, senha: novaSenha };
+      if (nome) {
+        if (editingAreaId) {
+          // Modo de edição
+          areas = areas.map(area =>
+            area.id === editingAreaId ? { ...area, nome: nome } : area
+          );
+          editingAreaId = null; // Reseta o ID de edição
+          btnSalvarArea.textContent = 'Salvar Área';
+          btnCancelarEdicao.style.display = 'none';
+        } else {
+          // Modo de adição
+          const newArea = {
+            id: generateId(),
+            nome: nome
+          };
+          areas.push(newArea);
+        }
+        saveAreas();
+        renderAreas();
+        areaForm.reset(); // Limpa o formulário
       } else {
-        return c;
+        alert('O nome da área não pode ser vazio!');
       }
     });
-    localStorage.setItem("contas", JSON.stringify(contas));
-    
-    alert("Senha alterada com sucesso! Redirecionando para o login...");
-    window.location.href = "index.html";
-  });
-}
+  }
 
-const btnCopiar = document.getElementById("btn-copiar");
-const spanCodigoGerado = document.getElementById("codigo-gerado"); // Certifique-se que você tenha um elemento com esse ID
-const msgCopiado = document.getElementById("msg-codigo-copiado");
+  // Delegação de eventos para botões de editar e excluir
+  if (areasTableBody) {
+    areasTableBody.addEventListener('click', (e) => {
+      if (e.target.classList.contains('edit-btn')) {
+        const idToEdit = e.target.dataset.id;
+        const areaToEdit = areas.find(area => area.id === idToEdit);
 
-if (btnCopiar) {
-  btnCopiar.addEventListener("click", () => {
-    const codigo = spanCodigoGerado.textContent.trim(); // Assumindo que o código está neste span
-    if (codigo && codigo !== "-") {
-      navigator.clipboard.writeText(codigo)
-        .then(() => {
-          msgCopiado.style.display = "block";
-          setTimeout(() => {
-            msgCopiado.style.display = "none";
-          }, 2000);
-        })
-        .catch(err => {
-          console.error('Falha ao copiar texto: ', err);
-          alert('Erro ao copiar código.');
-        });
+        if (areaToEdit) {
+          areaNomeInput.value = areaToEdit.nome;
+          editingAreaId = idToEdit;
+          btnSalvarArea.textContent = 'Atualizar Área';
+          btnCancelarEdicao.style.display = 'inline-block'; // Mostra o botão de cancelar
+          window.scrollTo(0, 0); // Rola para o topo para focar no formulário
+        }
+      } else if (e.target.classList.contains('delete-btn')) {
+        const idToDelete = e.target.dataset.id;
+        if (confirm('Tem certeza que deseja excluir esta área?')) {
+          areas = areas.filter(area => area.id !== idToDelete);
+          saveAreas();
+          renderAreas();
+        }
+      }
+    });
+  }
+
+  // Evento para o botão Cancelar Edição
+  if (btnCancelarEdicao) {
+    btnCancelarEdicao.addEventListener('click', () => {
+      editingAreaId = null;
+      areaForm.reset();
+      btnSalvarArea.textContent = 'Salvar Área';
+      btnCancelarEdicao.style.display = 'none';
+    });
+  }
+
+  // Evento de busca (com botão e ao digitar)
+  if (searchInput && searchButton) {
+    searchButton.addEventListener('click', () => {
+      renderAreas(searchInput.value);
+    });
+
+    searchInput.addEventListener('keyup', () => {
+      renderAreas(searchInput.value);
+    });
+  }
+
+  // Renderiza as áreas na primeira carga da página
+  renderAreas();
+});
+
+// ==================== CADASTRO DE MODALIDADES ====================
+document.addEventListener('DOMContentLoaded', () => {
+  const modalidadeForm = document.getElementById('modalidadeForm');
+  const modalidadeNomeInput = document.getElementById('modalidadeNome');
+  const modalidadesTableBody = document.querySelector('#modalidadesTableBody');
+  const btnSalvarModalidade = document.getElementById('btnSalvarModalidade');
+  const btnCancelarEdicaoModalidade = document.getElementById('btnCancelarEdicaoModalidade');
+  const searchModalidadeInput = document.getElementById('searchModalidadeInput');
+  const searchModalidadeButton = document.getElementById('searchModalidadeButton');
+  const noModalidadesMessage = document.getElementById('noModalidadesMessage');
+
+  let modalidades = JSON.parse(localStorage.getItem('modalidades')) || [];
+  let editingModalidadeId = null; // Variável para armazenar o ID da modalidade sendo editada
+
+  // Função para gerar um ID único (reaproveitando a que já existe ou criando uma nova se essa parte for separada)
+  // function generateId() {
+  //     return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  // }
+  // A função generateId() já foi definida anteriormente no scripts.js, então não precisamos redeclarar.
+
+  // Função para salvar as modalidades no localStorage
+  function saveModalidades() {
+    localStorage.setItem('modalidades', JSON.stringify(modalidades));
+  }
+
+  // Função para renderizar a tabela de modalidades
+  function renderModalidades(filter = '') {
+    if (!modalidadesTableBody) return; // Garante que estamos na página correta
+
+    modalidadesTableBody.innerHTML = ''; // Limpa a tabela antes de renderizar
+    const filteredModalidades = modalidades.filter(modalidade =>
+      modalidade.nome.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    if (filteredModalidades.length === 0) {
+      noModalidadesMessage.style.display = 'block';
+      modalidadesTableBody.style.display = 'none'; // Esconde a tabela se não houver resultados
+    } else {
+      noModalidadesMessage.style.display = 'none';
+      modalidadesTableBody.style.display = ''; // Mostra a tabela
+      filteredModalidades.forEach(modalidade => {
+        const row = modalidadesTableBody.insertRow();
+        row.dataset.id = modalidade.id; // Armazena o ID na linha para fácil acesso
+
+        row.innerHTML = `
+                    <td>${modalidade.id.substring(0, 5)}...</td> <td>${modalidade.nome}</td>
+                    <td class="actions">
+                        <button class="edit-btn" data-id="${modalidade.id}">Editar</button>
+                        <button class="delete-btn" data-id="${modalidade.id}">Excluir</button>
+                    </td>
+                `;
+      });
     }
-  });
-}
+  }
+
+  // Evento de submit do formulário
+  if (modalidadeForm) {
+    modalidadeForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = modalidadeNomeInput.value.trim();
+
+      if (nome) {
+        if (editingModalidadeId) {
+          // Modo de edição
+          modalidades = modalidades.map(modalidade =>
+            modalidade.id === editingModalidadeId ? { ...modalidade, nome: nome } : modalidade
+          );
+          editingModalidadeId = null; // Reseta o ID de edição
+          btnSalvarModalidade.textContent = 'Salvar Modalidade';
+          btnCancelarEdicaoModalidade.style.display = 'none';
+        } else {
+          // Modo de adição
+          const newModalidade = {
+            id: generateId(), // Reutiliza a função generateId do escopo global
+            nome: nome
+          };
+          modalidades.push(newModalidade);
+        }
+        saveModalidades();
+        renderModalidades();
+        modalidadeForm.reset(); // Limpa o formulário
+      } else {
+        alert('O nome da modalidade não pode ser vazio!');
+      }
+    });
+  }
+
+  // Delegação de eventos para botões de editar e excluir
+  if (modalidadesTableBody) {
+    modalidadesTableBody.addEventListener('click', (e) => {
+      if (e.target.classList.contains('edit-btn')) {
+        const idToEdit = e.target.dataset.id;
+        const modalidadeToEdit = modalidades.find(modalidade => modalidade.id === idToEdit);
+
+        if (modalidadeToEdit) {
+          modalidadeNomeInput.value = modalidadeToEdit.nome;
+          editingModalidadeId = idToEdit;
+          btnSalvarModalidade.textContent = 'Atualizar Modalidade';
+          btnCancelarEdicaoModalidade.style.display = 'inline-block'; // Mostra o botão de cancelar
+          window.scrollTo(0, 0); // Rola para o topo para focar no formulário
+        }
+      } else if (e.target.classList.contains('delete-btn')) {
+        const idToDelete = e.target.dataset.id;
+        if (confirm('Tem certeza que deseja excluir esta modalidade?')) {
+          modalidades = modalidades.filter(modalidade => modalidade.id !== idToDelete);
+          saveModalidades();
+          renderModalidades();
+        }
+      }
+    });
+  }
+
+  // Evento para o botão Cancelar Edição
+  if (btnCancelarEdicaoModalidade) {
+    btnCancelarEdicaoModalidade.addEventListener('click', () => {
+      editingModalidadeId = null;
+      modalidadeForm.reset();
+      btnSalvarModalidade.textContent = 'Salvar Modalidade';
+      btnCancelarEdicaoModalidade.style.display = 'none';
+    });
+  }
+
+  // Evento de busca (com botão e ao digitar)
+  if (searchModalidadeInput && searchModalidadeButton) {
+    searchModalidadeButton.addEventListener('click', () => {
+      renderModalidades(searchModalidadeInput.value);
+    });
+
+    searchModalidadeInput.addEventListener('keyup', () => {
+      renderModalidades(searchModalidadeInput.value);
+    });
+  }
+
+  // Renderiza as modalidades na primeira carga da página
+  renderModalidades();
+});
+
+
+// ==================== CADASTRO DE MODALIDADES ====================
+document.addEventListener('DOMContentLoaded', () => {
+  const modalidadeForm = document.getElementById('modalidadeForm');
+  const modalidadeNomeInput = document.getElementById('modalidadeNome');
+  const modalidadesTableBody = document.getElementById('modalidadesTableBody');
+  const btnSalvarModalidade = document.getElementById('btnSalvarModalidade');
+  const btnCancelarEdicaoModalidade = document.getElementById('btnCancelarEdicaoModalidade');
+  const searchModalidadeInput = document.getElementById('searchModalidadeInput');
+  const searchModalidadeButton = document.getElementById('searchModalidadeButton');
+  const noModalidadesMessage = document.getElementById('noModalidadesMessage');
+
+  let modalidades = JSON.parse(localStorage.getItem('modalidades')) || [];
+  let editingModalidadeId = null;
+
+  function saveModalidades() {
+    localStorage.setItem('modalidades', JSON.stringify(modalidades));
+  }
+
+  function renderModalidades(searchTerm = '') {
+    modalidadesTableBody.innerHTML = '';
+    const filteredModalidades = modalidades.filter(modalidade =>
+      modalidade.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (filteredModalidades.length === 0) {
+      noModalidadesMessage.style.display = 'block';
+      return;
+    } else {
+      noModalidadesMessage.style.display = 'none';
+    }
+
+    filteredModalidades.forEach(modalidade => {
+      const row = modalidadesTableBody.insertRow();
+      row.innerHTML = `
+        <td>${modalidade.id.substring(0, 8)}</td>
+        <td>${modalidade.nome}</td>
+        <td class="actions">
+          <button class="edit-btn" data-id="${modalidade.id}">Editar</button>
+          <button class="delete-btn" data-id="${modalidade.id}">Excluir</button>
+        </td>
+      `;
+    });
+  }
+
+  // Adicionar ou Atualizar Modalidade
+  if (modalidadeForm) {
+    modalidadeForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = modalidadeNomeInput.value.trim();
+
+      if (!nome) {
+        alert('Por favor, insira o nome da modalidade.');
+        return;
+      }
+
+      if (editingModalidadeId) {
+        // Edição
+        modalidades = modalidades.map(modalidade =>
+          modalidade.id === editingModalidadeId ? { ...modalidade, nome } : modalidade
+        );
+        editingModalidadeId = null;
+        btnSalvarModalidade.textContent = 'Salvar Modalidade';
+        btnCancelarEdicaoModalidade.style.display = 'none';
+      } else {
+        // Novo cadastro
+        const newModalidade = {
+          id: Date.now().toString(), // ID simples baseado no timestamp
+          nome: nome
+        };
+        modalidades.push(newModalidade);
+      }
+
+      saveModalidades();
+      modalidadeForm.reset();
+      renderModalidades();
+    });
+  }
+
+  // Editar e Excluir Modalidade
+  if (modalidadesTableBody) {
+    modalidadesTableBody.addEventListener('click', (e) => {
+      if (e.target.classList.contains('edit-btn')) {
+        const idToEdit = e.target.dataset.id;
+        const modalidadeToEdit = modalidades.find(modalidade => modalidade.id === idToEdit);
+        if (modalidadeToEdit) {
+          modalidadeNomeInput.value = modalidadeToEdit.nome;
+          editingModalidadeId = idToEdit;
+          btnSalvarModalidade.textContent = 'Atualizar Modalidade';
+          btnCancelarEdicaoModalidade.style.display = 'inline-block'; // Mostra o botão de cancelar
+          window.scrollTo(0, 0); // Rola para o topo para focar no formulário
+        }
+      } else if (e.target.classList.contains('delete-btn')) {
+        const idToDelete = e.target.dataset.id;
+        if (confirm('Tem certeza que deseja excluir esta modalidade?')) {
+          modalidades = modalidades.filter(modalidade => modalidade.id !== idToDelete);
+          saveModalidades();
+          renderModalidades();
+        }
+      }
+    });
+  }
+
+  // Evento para o botão Cancelar Edição
+  if (btnCancelarEdicaoModalidade) {
+    btnCancelarEdicaoModalidade.addEventListener('click', () => {
+      editingModalidadeId = null;
+      modalidadeForm.reset();
+      btnSalvarModalidade.textContent = 'Salvar Modalidade';
+      btnCancelarEdicaoModalidade.style.display = 'none';
+    });
+  }
+
+  // Evento de busca (com botão e ao digitar)
+  if (searchModalidadeInput && searchModalidadeButton) {
+    searchModalidadeButton.addEventListener('click', () => {
+      renderModalidades(searchModalidadeInput.value);
+    });
+
+    searchModalidadeInput.addEventListener('keyup', (e) => {
+      renderModalidades(searchModalidadeInput.value);
+    });
+  }
+
+  // Renderiza as modalidades ao carregar a página
+  renderModalidades();
+});
