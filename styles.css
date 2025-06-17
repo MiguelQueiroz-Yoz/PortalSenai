@@ -180,9 +180,9 @@ header button:hover {
 /* Logo used in login/cadastro */
 .logo {
   width: auto;
-  height: auto;
+  height: 200px;
   display: block;
-  padding-left: 0; /* Removendo qualquer padding extra que possa ter */
+  padding-left: 60px; /* Removendo qualquer padding extra que possa ter */
 }
 
 /* --- Specific styles for Professor Dashboard (professor.html) --- */
@@ -463,4 +463,633 @@ header button:hover {
   .content.center-content {
     margin: 20px 10px;
   }
+}
+
+/* --- Estilos para Páginas de Cadastro (Formulários e Tabelas) --- */
+
+.content.center-content {
+    background-color: var(--bg-card);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px; /* Largura máxima para o conteúdo central */
+    margin: 20px auto; /* Centraliza e adiciona margem */
+    text-align: left; /* Alinha o texto à esquerda dentro do container */
+}
+
+.content.center-content h2 {
+    text-align: center;
+    color: var(--text-default);
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.form-section, .list-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background-color: var(--bg-page); /* Cor de fundo ligeiramente diferente para as seções */
+}
+
+.form-section h3, .list-section h3 {
+    color: var(--text-default);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--input-border);
+    padding-bottom: 10px;
+}
+
+/* Estilos de Formulário */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-default);
+    font-weight: bold;
+}
+
+.form-section input[type="text"],
+.form-section input[type="email"],
+.form-section input[type="password"],
+.form-section input[type="number"],
+.form-section select,
+.form-section textarea {
+    width: calc(100% - 20px); /* Ajusta a largura com padding */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-default);
+    font-size: 1em;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+}
+
+.form-section button[type="submit"],
+.form-section button[type="button"] {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.form-section button[type="submit"]:hover,
+.form-section button[type="button"]:hover {
+    background-color: var(--link-color); /* Um tom mais escuro ou mais vibrante no hover */
+}
+
+/* Estilos de Tabela */
+.list-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.list-section th, .list-section td {
+    border: 1px solid var(--input-border);
+    padding: 12px;
+    text-align: left;
+    color: var(--text-default);
+}
+
+.list-section th {
+    background-color: var(--button-bg); /* Cabeçalho da tabela com cor de botão */
+    color: var(--button-text);
+    font-weight: bold;
+}
+
+.list-section tr:nth-child(even) {
+    background-color: var(--input-bg); /* Fundo alternado para linhas da tabela */
+}
+
+.list-section tr:hover {
+    background-color: var(--progress-bg); /* Hover nas linhas da tabela */
+}
+
+.list-section .actions button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.list-section .actions button.edit-btn {
+    background-color: #ffc107; /* Amarelo para editar */
+    color: #333;
+}
+
+.list-section .actions button.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.list-section .actions button.delete-btn {
+    background-color: #dc3545; /* Vermelho para excluir */
+}
+
+.list-section .actions button.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Barra de Busca */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-default);
+}
+
+.search-bar button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: var(--link-color);
+}
+
+/* General Form and List Styles */
+.content {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content h2 {
+    color: var(--text-default);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-section, .list-section {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-default);
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.search-bar input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-default);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions button:hover {
+    background-color: var(--link-color);
+}
+
+.form-actions button.cancel-btn {
+    background-color: #6c757d; /* Cinza para cancelar */
+}
+
+.form-actions button.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+/* List Section */
+.list-section h3 {
+    color: var(--text-default);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.table-container {
+    overflow-x: auto; /* Garante que a tabela seja responsiva */
+}
+
+.list-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.list-section th,
+.list-section td {
+    border: 1px solid var(--input-border);
+    padding: 10px;
+    text-align: left;
+    color: var(--text-default);
+}
+
+.list-section th {
+    background-color: var(--progress-bg);
+    font-weight: bold;
+}
+
+.list-section tr:nth-child(even) {
+    background-color: var(--bg-page); /* Cor alternado para linhas da tabela */
+}
+
+.list-section tr:hover {
+    background-color: var(--progress-bg); /* Hover nas linhas da tabela */
+}
+
+.list-section .actions button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.list-section .actions button.edit-btn {
+    background-color: #ffc107; /* Amarelo para editar */
+    color: #333;
+}
+
+.list-section .actions button.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.list-section .actions button.delete-btn {
+    background-color: #dc3545; /* Vermelho para excluir */
+}
+
+.list-section .actions button.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    flex-grow: 1;
+}
+
+.search-bar button {
+    background-color: #28a745; /* Verde para buscar */
+    color: var(--button-text);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #218838;
+}
+
+.no-results-message {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* Responsive adjustments for professor.html navigation */
+@media (max-width: 768px) {
+    .professor-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-left,
+    .header-center,
+    .header-right {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .header-right {
+        order: 3; /* Move theme toggle to the bottom */
+        margin-top: 0;
+    }
+
+    .professor-header .logo img {
+        margin: 0 auto;
+    }
+
+    .professor-header .title {
+        font-size: 22px;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .main-nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav ul li a {
+        padding: 10px 0;
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        width: 100%;
+        border: none;
+        border-top: 1px solid var(--input-border);
+    }
+}
+
+/* General Form and List Styles */
+.content {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content h2 {
+    color: var(--text-default);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-section, .list-section {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-default);
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.search-bar input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-default);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions button:hover {
+    background-color: var(--link-color);
+}
+
+.form-actions button.cancel-btn {
+    background-color: #6c757d; /* Cinza para cancelar */
+}
+
+.form-actions button.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+/* List Section */
+.list-section h3 {
+    color: var(--text-default);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.table-container {
+    overflow-x: auto; /* Garante que a tabela seja responsiva */
+}
+
+.list-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.list-section th,
+.list-section td {
+    border: 1px solid var(--input-border);
+    padding: 10px;
+    text-align: left;
+    color: var(--text-default);
+}
+
+.list-section th {
+    background-color: var(--progress-bg);
+    font-weight: bold;
+}
+
+.list-section tr:nth-child(even) {
+    background-color: var(--bg-page); /* Cor alternado para linhas da tabela */
+}
+
+.list-section tr:hover {
+    background-color: var(--progress-bg); /* Hover nas linhas da tabela */
+}
+
+.list-section .actions button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.list-section .actions button.edit-btn {
+    background-color: #ffc107; /* Amarelo para editar */
+    color: #333;
+}
+
+.list-section .actions button.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.list-section .actions button.delete-btn {
+    background-color: #dc3545; /* Vermelho para excluir */
+}
+
+.list-section .actions button.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    flex-grow: 1;
+}
+
+.search-bar button {
+    background-color: #28a745; /* Verde para buscar */
+    color: var(--button-text);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #218838;
+}
+
+.no-results-message {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* Responsive adjustments for professor.html navigation */
+@media (max-width: 768px) {
+    .professor-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-left,
+    .header-center,
+    .header-right {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .header-right {
+        order: 3; /* Move theme toggle to the bottom */
+        margin-top: 0;
+    }
+
+    .professor-header .logo img {
+        margin: 0 auto;
+    }
+
+    .professor-header .title {
+        font-size: 22px;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .main-nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav ul li a {
+        padding: 10px 0;
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        width: 100%;
+        border: none;
+        border-top: 1px solid var(--input-border);
+    }
 }
