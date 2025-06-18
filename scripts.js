@@ -508,3 +508,75 @@ document.addEventListener('DOMContentLoaded', () => {
   // Renderiza as modalidades ao carregar a página
   renderModalidades();
 });
+
+// ==================== CONSULTA HORÁRIOS ====================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const instrutores = ['Carlos Silva', 'Ana Souza', 'Marcos Lima'];
+  const turmas = ['ADS2024-1', 'MEC2024-2', 'ELE2024-3'];
+
+  const instrutorSelect = document.getElementById('instrutor');
+  const turmaSelect = document.getElementById('turma');
+
+  // Preencher selects
+  instrutores.forEach(instrutor => {
+      const opt = document.createElement('option');
+      opt.value = instrutor;
+      opt.textContent = instrutor;
+      instrutorSelect.appendChild(opt);
+  });
+
+  turmas.forEach(turma => {
+      const opt = document.createElement('option');
+      opt.value = turma;
+      opt.textContent = turma;
+      turmaSelect.appendChild(opt);
+  });
+});
+
+// Função para simular dados e filtrar
+function filtrarHorarios() {
+  const dataInicial = document.getElementById('dataInicial').value;
+  const dataFinal = document.getElementById('dataFinal').value;
+  const periodo = document.getElementById('periodo').value;
+  const instrutor = document.getElementById('instrutor').value;
+  const turma = document.getElementById('turma').value;
+  const encerradas = document.getElementById('encerradas').checked;
+
+  const tabelaBody = document.querySelector('#tabelaHorarios tbody');
+  tabelaBody.innerHTML = '';
+
+  // Simulação de dados
+  const horarios = [
+      { data: '2024-06-20', periodo: 'Manhã', instrutor: 'Carlos Silva', turma: 'ADS2024-1', horario: '08:00 - 12:00', encerrada: false },
+      { data: '2024-06-21', periodo: 'Tarde', instrutor: 'Ana Souza', turma: 'MEC2024-2', horario: '13:00 - 17:00', encerrada: true },
+      { data: '2024-06-22', periodo: 'Noite', instrutor: 'Marcos Lima', turma: 'ELE2024-3', horario: '18:00 - 22:00', encerrada: false },
+  ];
+
+  const filtrados = horarios.filter(h => {
+      const dentroData = (!dataInicial || h.data >= dataInicial) && (!dataFinal || h.data <= dataFinal);
+      const matchPeriodo = !periodo || h.periodo === periodo;
+      const matchInstrutor = !instrutor || h.instrutor === instrutor;
+      const matchTurma = !turma || h.turma === turma;
+      const matchEncerrada = encerradas ? true : !h.encerrada;
+
+      return dentroData && matchPeriodo && matchInstrutor && matchTurma && matchEncerrada;
+  });
+
+  if (filtrados.length === 0) {
+      const row = tabelaBody.insertRow();
+      const cell = row.insertCell(0);
+      cell.colSpan = 5;
+      cell.textContent = 'Nenhum horário encontrado.';
+      cell.style.textAlign = 'center';
+  } else {
+      filtrados.forEach(h => {
+          const row = tabelaBody.insertRow();
+          row.insertCell(0).textContent = h.data;
+          row.insertCell(1).textContent = h.periodo;
+          row.insertCell(2).textContent = h.instrutor;
+          row.insertCell(3).textContent = h.turma;
+          row.insertCell(4).textContent = h.horario;
+      });
+  }
+}
