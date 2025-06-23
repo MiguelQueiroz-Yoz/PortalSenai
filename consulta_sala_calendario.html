@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +74,31 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Consulta de Sala (Calendário)</h2>
-            <p>Conteúdo para consultar o calendário da sala aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Consulta de Sala (Calendário)</h2>
+            <section class="form-section">
+                <h3>Visualizar Calendário da Sala</h3>
+                <div class="input-group">
+                    <label for="calendarioSala">Sala:</label>
+                    <select id="calendarioSala" required>
+                        <option value="">Selecione a Sala</option>
+                        <!-- Salas serão carregadas via JS -->
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="calendarioSalaMesAno">Mês/Ano:</label>
+                    <input type="month" id="calendarioSalaMesAno" required>
+                </div>
+                <button onclick="gerarCalendarioSala()">Gerar Calendário</button>
+            </section>
+            <section class="list-section">
+                <h3>Disponibilidade da Sala</h3>
+                <div id="calendarioSalaDisplay" style="text-align: center; margin-top: 20px;">
+                    <!-- Calendário será gerado aqui -->
+                    <p id="noCalendarioSalaMessage" style="display: none;">Selecione uma sala e um mês para gerar o calendário.</p>
+                </div>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

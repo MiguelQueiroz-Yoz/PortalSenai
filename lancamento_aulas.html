@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +74,64 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Lançamento de Aulas</h2>
-            <p>Conteúdo para lançar aulas aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Lançamento de Aulas</h2>
+            <section class="form-section">
+                <h3>Registrar Aula</h3>
+                <form id="lancamentoAulaForm">
+                    <div class="input-group">
+                        <label for="aulaData">Data da Aula:</label>
+                        <input type="date" id="aulaData" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="aulaTurma">Turma:</label>
+                        <select id="aulaTurma" required>
+                            <option value="">Selecione a Turma</option>
+                            <!-- Turmas serão carregadas via JS -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="aulaInstrutor">Instrutor:</label>
+                        <select id="aulaInstrutor" required>
+                            <option value="">Selecione o Instrutor</option>
+                            <!-- Instrutores serão carregados via JS -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="aulaMateria">Matéria/Conteúdo:</label>
+                        <input type="text" id="aulaMateria" placeholder="Ex: Introdução à Programação" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="aulaHoras">Horas/Aula:</label>
+                        <input type="number" id="aulaHoras" min="0.5" step="0.5" required>
+                    </div>
+                    <button type="submit" id="btnRegistrarAula">Registrar Aula</button>
+                </form>
+            </section>
+            <section class="list-section">
+                <h3>Aulas Lançadas Recentemente</h3>
+                <div class="search-bar">
+                    <input type="text" id="searchAulaInput" placeholder="Buscar aula...">
+                    <button id="searchAulaButton">Buscar</button>
+                </div>
+                <table id="aulasTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Turma</th>
+                            <th>Instrutor</th>
+                            <th>Matéria</th>
+                            <th>Horas</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="aulasTableBody">
+                        </tbody>
+                </table>
+                <p id="noAulasMessage" style="text-align: center; display: none;">Nenhuma aula lançada ainda.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

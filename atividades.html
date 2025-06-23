@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,11 +74,43 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Cadastro de Atividades</h2>
-            <p>Conteúdo para gerenciar atividades aqui...</p>
-        </div>
-    </div>
-    <script src="scripts.js"></script>
+        <section class="form-section">
+            <h3>Adicionar Nova Atividade</h3>
+            <form id="atividadeForm">
+                <div class="input-group">
+                    <label for="atividadeNome">Nome da Atividade:</label>
+                    <input type="text" id="atividadeNome" placeholder="Ex: Projeto Final" required>
+                </div>
+                <div class="input-group">
+                    <label for="atividadeDescricao">Descrição:</label>
+                    <textarea id="atividadeDescricao" placeholder="Detalhes da atividade..." rows="3"></textarea>
+                </div>
+                <button type="submit" id="btnSalvarAtividade">Salvar Atividade</button>
+                <button type="button" id="btnCancelarEdicaoAtividade" style="display: none;">Cancelar Edição</button>
+            </form>
+        </section>
+        <section class="list-section">
+            <h3>Atividades Cadastradas</h3>
+            <div class="search-bar">
+                <input type="text" id="searchAtividadeInput" placeholder="Buscar atividade...">
+                <button id="searchAtividadeButton">Buscar</button>
+            </div>
+            <table id="atividadesTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome da Atividade</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="atividadesTableBody">
+                    </tbody>
+            </table>
+            <p id="noAtividadesMessage" style="text-align: center; display: none;">Nenhuma atividade cadastrada ainda.</p>
+        </section>
+    </main>
+</div>
+<script src="scripts.js"></script>
 </body>
 </html>

@@ -580,3 +580,90 @@ function filtrarHorarios() {
       });
   }
 }
+// scripts.js (Adicione este código ao final do seu arquivo scripts.js)
+
+// ==================== RELATÓRIOS ====================
+document.addEventListener('DOMContentLoaded', () => {
+  const btnGerarRelatorio = document.getElementById('btnGerarRelatorio');
+  const tipoRelatorioSelect = document.getElementById('tipoRelatorio');
+  const resultadoRelatorioSection = document.getElementById('resultadoRelatorio');
+  const tabelaRelatorioHead = document.querySelector('#tabelaRelatorio thead tr');
+  const tabelaRelatorioBody = document.querySelector('#tabelaRelatorio tbody');
+  const noResultsRelatorio = document.getElementById('noResultsRelatorio');
+
+  if (btnGerarRelatorio) {
+      btnGerarRelatorio.addEventListener('click', () => {
+          const tipo = tipoRelatorioSelect.value;
+          tabelaRelatorioHead.innerHTML = '';
+          tabelaRelatorioBody.innerHTML = '';
+          noResultsRelatorio.style.display = 'none';
+          resultadoRelatorioSection.style.display = 'block'; // Mostra a seção de resultados
+
+          let dados = [];
+          let headers = [];
+
+          switch (tipo) {
+              case 'aulas_por_instrutor':
+                  headers = ['Instrutor', 'Total de Aulas', 'Horas Lecionadas'];
+                  dados = [
+                      { instrutor: 'Carlos Silva', aulas: 15, horas: 60 },
+                      { instrutor: 'Ana Souza', aulas: 12, horas: 48 },
+                      { instrutor: 'Marcos Lima', aulas: 18, horas: 72 }
+                  ];
+                  break;
+              case 'atividades_por_turma':
+                  headers = ['Turma', 'Atividades Concluídas', 'Atividades Pendentes'];
+                  dados = [
+                      { turma: 'ADS2024-1', concluidas: 8, pendentes: 2 },
+                      { turma: 'MEC2024-2', concluidas: 10, pendentes: 1 },
+                      { turma: 'ELE2024-3', concluidas: 7, pendentes: 3 }
+                  ];
+                  break;
+              case 'salas_disponiveis':
+                  headers = ['Sala', 'Capacidade', 'Disponibilidade (Hoje)'];
+                  dados = [
+                      { sala: 'Sala 101', capacidade: 30, disponibilidade: 'Livre' },
+                      { sala: 'Sala 102', capacidade: 25, disponibilidade: 'Ocupada' },
+                      { sala: 'Laboratório A', capacidade: 20, disponibilidade: 'Livre' }
+                  ];
+                  break;
+              default:
+                  noResultsRelatorio.textContent = 'Por favor, selecione um tipo de relatório válido.';
+                  noResultsRelatorio.style.display = 'block';
+                  resultadoRelatorioSection.style.display = 'none'; // Esconde a seção se não houver tipo válido
+                  return;
+          }
+
+          // Adiciona os cabeçalhos da tabela
+          headers.forEach(headerText => {
+              const th = document.createElement('th');
+              th.textContent = headerText;
+              tabelaRelatorioHead.appendChild(th);
+          });
+
+          // Adiciona os dados à tabela
+          if (dados.length > 0) {
+              dados.forEach(item => {
+                  const row = tabelaRelatorioBody.insertRow();
+                  if (tipo === 'aulas_por_instrutor') {
+                      row.insertCell(0).textContent = item.instrutor;
+                      row.insertCell(1).textContent = item.aulas;
+                      row.insertCell(2).textContent = item.horas;
+                  } else if (tipo === 'atividades_por_turma') {
+                      row.insertCell(0).textContent = item.turma;
+                      row.insertCell(1).textContent = item.concluidas;
+                      row.insertCell(2).textContent = item.pendentes;
+                  } else if (tipo === 'salas_disponiveis') {
+                      row.insertCell(0).textContent = item.sala;
+                      row.insertCell(1).textContent = item.capacidade;
+                      row.insertCell(2).textContent = item.disponibilidade;
+                  }
+              });
+          } else {
+              noResultsRelatorio.textContent = 'Nenhum dado encontrado para este relatório.';
+              noResultsRelatorio.style.display = 'block';
+          }
+      });
+  }
+});
+

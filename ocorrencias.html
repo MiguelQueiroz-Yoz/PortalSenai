@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +74,65 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Ocorrências</h2>
-            <p>Conteúdo para gerenciar ocorrências aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Registro de Ocorrências</h2>
+            <section class="form-section">
+                <h3>Registrar Nova Ocorrência</h3>
+                <form id="ocorrenciaForm">
+                    <div class="input-group">
+                        <label for="ocorrenciaData">Data da Ocorrência:</label>
+                        <input type="date" id="ocorrenciaData" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ocorrenciaTurma">Turma (Opcional):</label>
+                        <select id="ocorrenciaTurma">
+                            <option value="">Selecione a Turma</option>
+                            <!-- Turmas serão carregadas via JS -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="ocorrenciaInstrutor">Instrutor (Opcional):</label>
+                        <select id="ocorrenciaInstrutor">
+                            <option value="">Selecione o Instrutor</option>
+                            <!-- Instrutores serão carregados via JS -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="ocorrenciaTipo">Tipo de Ocorrência:</label>
+                        <input type="text" id="ocorrenciaTipo" placeholder="Ex: Atraso, Problema Técnico" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ocorrenciaDescricao">Descrição Detalhada:</label>
+                        <textarea id="ocorrenciaDescricao" placeholder="Descreva a ocorrência..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" id="btnSalvarOcorrencia">Registrar Ocorrência</button>
+                    <button type="button" id="btnCancelarEdicaoOcorrencia" style="display: none;">Cancelar Edição</button>
+                </form>
+            </section>
+            <section class="list-section">
+                <h3>Ocorrências Registradas</h3>
+                <div class="search-bar">
+                    <input type="text" id="searchOcorrenciaInput" placeholder="Buscar ocorrência...">
+                    <button id="searchOcorrenciaButton">Buscar</button>
+                </div>
+                <table id="ocorrenciasTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Turma</th>
+                            <th>Instrutor</th>
+                            <th>Tipo</th>
+                            <th>Descrição</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ocorrenciasTableBody">
+                        </tbody>
+                </table>
+                <p id="noOcorrenciasMessage" style="text-align: center; display: none;">Nenhuma ocorrência registrada ainda.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

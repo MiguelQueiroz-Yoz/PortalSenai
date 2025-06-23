@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +74,59 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Lançamento de Atividades</h2>
-            <p>Conteúdo para lançar atividades aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Lançamento de Atividades</h2>
+            <section class="form-section">
+                <h3>Registrar Atividade para Turma</h3>
+                <form id="lancamentoAtividadeForm">
+                    <div class="input-group">
+                        <label for="atividadeTurma">Turma:</label>
+                        <select id="atividadeTurma" required>
+                            <option value="">Selecione a Turma</option>
+                            <!-- Turmas serão carregadas via JS -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="atividadeSelecionada">Atividade:</label>
+                        <select id="atividadeSelecionada" required>
+                            <option value="">Selecione a Atividade</option>
+                            <!-- Atividades serão carregadas via JS -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="atividadeDataEntrega">Data de Entrega:</label>
+                        <input type="date" id="atividadeDataEntrega" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="atividadeObservacoes">Observações:</label>
+                        <textarea id="atividadeObservacoes" placeholder="Observações sobre a atividade..." rows="3"></textarea>
+                    </div>
+                    <button type="submit" id="btnRegistrarAtividade">Registrar Atividade</button>
+                </form>
+            </section>
+            <section class="list-section">
+                <h3>Atividades Lançadas</h3>
+                <div class="search-bar">
+                    <input type="text" id="searchLancamentoAtividadeInput" placeholder="Buscar lançamento...">
+                    <button id="searchLancamentoAtividadeButton">Buscar</button>
+                </div>
+                <table id="lancamentoAtividadesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Turma</th>
+                            <th>Atividade</th>
+                            <th>Data de Entrega</th>
+                            <th>Observações</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lancamentoAtividadesTableBody">
+                        </tbody>
+                </table>
+                <p id="noLancamentoAtividadesMessage" style="text-align: center; display: none;">Nenhuma atividade lançada ainda.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

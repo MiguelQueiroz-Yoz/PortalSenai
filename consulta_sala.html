@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +74,36 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Consulta de Sala</h2>
-            <p>Conteúdo para consultar salas aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Consulta de Sala</h2>
+            <section class="form-section">
+                <h3>Buscar Sala</h3>
+                <div class="input-group">
+                    <label for="consultaSalaNome">Nome da Sala:</label>
+                    <input type="text" id="consultaSalaNome" placeholder="Digite o nome da sala">
+                </div>
+                <div class="input-group">
+                    <label for="consultaSalaCapacidadeMin">Capacidade Mínima:</label>
+                    <input type="number" id="consultaSalaCapacidadeMin" min="1" placeholder="Ex: 10">
+                </div>
+                <button onclick="consultarSalas()">Consultar</button>
+            </section>
+            <section class="list-section">
+                <h3>Resultados da Consulta</h3>
+                <table id="consultaSalasTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome da Sala</th>
+                            <th>Capacidade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="consultaSalasTableBody">
+                        </tbody>
+                </table>
+                <p id="noConsultaSalasMessage" style="text-align: center; display: none;">Nenhuma sala encontrada.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

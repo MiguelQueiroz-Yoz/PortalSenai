@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +74,46 @@
             </div>
         </header>
 
-        <div class="content center-content">
+ <main class="content center-content">
             <h2>Página de Relatórios</h2>
-            <p>Conteúdo para relatórios aqui...</p>
-        </div>
+            
+            <section class="form-section">
+                <h3>Gerar Relatório</h3>
+                <div class="input-group">
+                    <label for="tipoRelatorio">Tipo de Relatório:</label>
+                    <select id="tipoRelatorio">
+                        <option value="">Selecione um tipo</option>
+                        <option value="aulas_por_instrutor">Aulas por Instrutor</option>
+                        <option value="atividades_por_turma">Atividades por Turma</option>
+                        <option value="salas_disponiveis">Salas Disponíveis</option>
+                        <option value="turmas_ativas">Turmas Ativas</option>
+                        <option value="instrutores_por_area">Instrutores por Área</option>
+                        <option value="feriados_do_ano">Feriados do Ano</option>
+                        <option value="ocorrencias_por_periodo">Ocorrências por Período</option>
+                    </select>
+                </div>
+                <div class="input-group" id="relatorioFiltrosAdicionais" style="display: none;">
+                    <!-- Filtros adicionais serão carregados via JS -->
+                </div>
+                <button id="btnGerarRelatorio">Gerar Relatório</button>
+            </section>
+            <section class="list-section" id="resultadoRelatorio" style="display: none;">
+                <h3>Resultado do Relatório</h3>
+                <div class="table-container">
+                    <table id="tabelaRelatorio">
+                        <thead>
+                            <tr>
+                                <!-- Cabeçalhos dinâmicos -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados dinâmicos -->
+                        </tbody>
+                    </table>
+                </div>
+                <p id="noResultsRelatorio" class="no-results-message" style="display: none;">Nenhum dado encontrado para este relatório.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,11 +74,45 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Cadastro de Salas</h2>
-            <p>Conteúdo para gerenciar salas aqui...</p>
-        </div>
-    </div>
+        <main class="content center-content">
+            <h2>Cadastro de Salas</h2>
+            <section class="form-section">
+                <h3>Adicionar Nova Sala</h3>
+                <form id="salaForm">
+                    <div class="input-group">
+                        <label for="salaNome">Nome da Sala:</label>
+                        <input type="text" id="salaNome" placeholder="Ex: Sala 101" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="salaCapacidade">Capacidade:</label>
+                        <input type="number" id="salaCapacidade" placeholder="Ex: 30" min="1" required>
+                    </div>
+                    <button type="submit" id="btnSalvarSala">Salvar Sala</button>
+                    <button type="button" id="btnCancelarEdicaoSala" style="display: none;">Cancelar Edição</button>
+                </form>
+            </section>
+            <section class="list-section">
+                <h3>Salas Cadastradas</h3>
+                <div class="search-bar">
+                    <input type="text" id="searchSalaInput" placeholder="Buscar sala...">
+                    <button id="searchSalaButton">Buscar</button>
+                </div>
+                <table id="salasTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome da Sala</th>
+                            <th>Capacidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salasTableBody">
+                    </tbody>
+            </table>
+            <p id="noSalasMessage" style="text-align: center; display: none;">Nenhuma sala cadastrada ainda.</p>
+        </section>
+    </main>
+</div>
     <script src="scripts.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,8 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
+
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +75,40 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Consulta de Instrutor</h2>
-            <p>Conteúdo para consultar instrutores aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Consulta de Instrutor</h2>
+            <section class="form-section">
+                <h3>Buscar Instrutor</h3>
+                <div class="input-group">
+                    <label for="consultaInstrutorNome">Nome do Instrutor:</label>
+                    <input type="text" id="consultaInstrutorNome" placeholder="Digite o nome do instrutor">
+                </div>
+                <div class="input-group">
+                    <label for="consultaInstrutorArea">Área de Atuação:</label>
+                    <select id="consultaInstrutorArea">
+                        <option value="">Todas as Áreas</option>
+                        <!-- Áreas serão carregadas via JS -->
+                    </select>
+                </div>
+                <button onclick="consultarInstrutores()">Consultar</button>
+            </section>
+            <section class="list-section">
+                <h3>Resultados da Consulta</h3>
+                <table id="consultaInstrutoresTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Área</th>
+                        </tr>
+                    </thead>
+                    <tbody id="consultaInstrutoresTableBody">
+                        </tbody>
+                </table>
+                <p id="noConsultaInstrutoresMessage" style="text-align: center; display: none;">Nenhum instrutor encontrado.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

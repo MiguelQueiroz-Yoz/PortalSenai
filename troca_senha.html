@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recuperar Senha</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <div style="text-align: right; padding: 10px;">
+    <button id="theme-toggle" class="theme-toggle-button" title="Alternar Tema">
+      🌙
+    </button>
+  </div>
+
+  <div class="login-container">
+    <h2>Trocar de Senha</h2>
+
+    <div class="progress-container">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+
+    <div id="etapa-1">
+      <label for="emailRecuperar">Digite seu e-mail:</label>
+      <input type="email" id="emailRecuperar" placeholder="seu@email"/>
+      <button id="btn-enviar-codigo">Enviar código</button>
+      <p id="msg-email-invalido" style="display: none; color: red; font-size: 14px;">
+        E-mail não encontrado.
+      </p>
+    </div>
+
+    <div id="etapa-2" style="display: none;">
+      <label for="codigoVerificar">Digite o código recebido:</label>
+      <input type="text" id="codigoVerificar" placeholder="------" maxlength="6"/>
+      <button id="btn-verificar-codigo">Verificar Código</button>
+      <p id="msg-codigo-invalido" style="display: none; color: red; font-size: 14px;">
+        Código inválido. Tente novamente.
+      </p>
+    </div>
+
+    <div id="etapa-3" style="display: none;">
+      <label for="novaSenha">Defina sua nova senha:</label>
+      <input type="password" id="novaSenha" placeholder="Nova senha"/>
+      <p id="forca-senha" style="font-size: 14px; margin-top: -12px; margin-bottom: 12px;">
+        Força da senha: <span id="texto-forca-senha">-</span>
+      </p>
+      <button id="btn-alterar-senha">Alterar Senha</button>
+
+      <div id="etapa-codigo-gerado" style="margin-top: 16px; text-align: center;">
+      
+        <p id="msg-codigo-copiado" style="
+          display: none;
+          color: green;
+          font-size: 14px;
+          margin-top: 4px;
+        ">
+          Código copiado!
+        </p>
+        <button id="btn-copiar" style="width: auto; padding: 8px 15px; font-size: 14px; margin-bottom: 8px;">Copiar Código</button>
+      </div>
+    </div>
+
+    <p style="margin-top: 20px;"><a href="professor.html">Voltar para página inicial</a></p>
+  </div>
+</body>
+</html>

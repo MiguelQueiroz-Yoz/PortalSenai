@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +74,44 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Matérias a Lançar</h2>
-            <p>Conteúdo para matérias a serem lançadas aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Matérias a Lançar</h2>
+            <section class="form-section">
+                <h3>Filtrar Matérias Pendentes</h3>
+                <div class="input-group">
+                    <label for="pendentesTurmaSelect">Turma:</label>
+                    <select id="pendentesTurmaSelect">
+                        <option value="">Todas as Turmas</option>
+                        <!-- Turmas serão carregadas via JS -->
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="pendentesInstrutorSelect">Instrutor:</label>
+                    <select id="pendentesInstrutorSelect">
+                        <option value="">Todos os Instrutores</option>
+                        <!-- Instrutores serão carregados via JS -->
+                    </select>
+                </div>
+                <button onclick="consultarMateriasALancar()">Consultar</button>
+            </section>
+            <section class="list-section">
+                <h3>Matérias Pendentes de Lançamento</h3>
+                <table id="materiasALancarTable">
+                    <thead>
+                        <tr>
+                            <th>Turma</th>
+                            <th>Instrutor</th>
+                            <th>Matéria</th>
+                            <th>Horas Pendentes</th>
+                            <th>Último Lançamento</th>
+                        </tr>
+                    </thead>
+                    <tbody id="materiasALancarTableBody">
+                        </tbody>
+                </table>
+                <p id="noMateriasALancarMessage" style="text-align: center; display: none;">Nenhuma matéria pendente de lançamento encontrada.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

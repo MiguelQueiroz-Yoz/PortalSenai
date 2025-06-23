@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,7 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +74,52 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Consulta de Ocorrências</h2>
-            <p>Conteúdo para consultar ocorrências aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Consulta de Ocorrências</h2>
+            <section class="form-section">
+                <h3>Filtrar Ocorrências</h3>
+                <div class="input-group">
+                    <label for="consultaOcorrenciaDataInicio">Data Início:</label>
+                    <input type="date" id="consultaOcorrenciaDataInicio">
+                </div>
+                <div class="input-group">
+                    <label for="consultaOcorrenciaDataFim">Data Fim:</label>
+                    <input type="date" id="consultaOcorrenciaDataFim">
+                </div>
+                <div class="input-group">
+                    <label for="consultaOcorrenciaTurma">Turma:</label>
+                    <select id="consultaOcorrenciaTurma">
+                        <option value="">Todas as Turmas</option>
+                        <!-- Turmas serão carregadas via JS -->
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="consultaOcorrenciaInstrutor">Instrutor:</label>
+                    <select id="consultaOcorrenciaInstrutor">
+                        <option value="">Todos os Instrutores</option>
+                        <!-- Instrutores serão carregados via JS -->
+                    </select>
+                </div>
+                <button onclick="consultarOcorrencias()">Consultar</button>
+            </section>
+            <section class="list-section">
+                <h3>Resultados da Consulta</h3>
+                <table id="consultaOcorrenciasTable">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Turma</th>
+                            <th>Instrutor</th>
+                            <th>Tipo</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody id="consultaOcorrenciasTableBody">
+                        </tbody>
+                </table>
+                <p id="noConsultaOcorrenciasMessage" style="text-align: center; display: none;">Nenhuma ocorrência encontrada.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>

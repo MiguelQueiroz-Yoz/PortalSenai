@@ -12,7 +12,7 @@
         <header class="professor-header">
             <div class="header-left">
                 <div class="logo">
-                    <img src="img/logo-senai.png" alt="SESI SENAI">
+                    <img src="logo-senai.png" alt="SESI SENAI">
                 </div>
             </div>
             <div class="header-center">
@@ -60,10 +60,8 @@
                             <a href="#" class="dropbtn">Utilitários</a>
                             <div class="dropdown-content">
                                 <a href="parametros.html">Parâmetros</a>
-                                <a href="syslog.html">Syslog</a>
-                                <a href="liberacao_usuarios.html">Liberação de usuários</a>
                                 <a href="troca_senha.html">Troca de senha</a>
-                                <a href="lista_telefonica.html">Lista Telefônica</a>
+
                             </div>
                         </li>
                         <li><a href="index.html">Logout</a></li>
@@ -77,10 +75,37 @@
             </div>
         </header>
 
-        <div class="content center-content">
-            <h2>Página de Programação de Turma</h2>
-            <p>Conteúdo para consultar a programação de turmas aqui...</p>
-        </div>
+        <main class="content center-content">
+            <h2>Programação de Turma</h2>
+            <section class="form-section">
+                <h3>Consultar Programação de uma Turma</h3>
+                <div class="input-group">
+                    <label for="consultaProgramacaoTurmaSelect">Turma:</label>
+                    <select id="consultaProgramacaoTurmaSelect" required>
+                        <option value="">Selecione a Turma</option>
+                        <!-- Turmas serão carregadas via JS -->
+                    </select>
+                </div>
+                <button onclick="consultarProgramacaoDeTurma()">Consultar</button>
+            </section>
+            <section class="list-section">
+                <h3>Detalhes da Programação</h3>
+                <table id="programacaoDeTurmaTable">
+                    <thead>
+                        <tr>
+                            <th>Instrutor</th>
+                            <th>Sala</th>
+                            <th>Data Início</th>
+                            <th>Data Fim</th>
+                            <th>Horário</th>
+                        </tr>
+                    </thead>
+                    <tbody id="programacaoDeTurmaTableBody">
+                        </tbody>
+                </table>
+                <p id="noProgramacaoDeTurmaMessage" style="text-align: center; display: none;">Nenhuma programação encontrada para esta turma.</p>
+            </section>
+        </main>
     </div>
     <script src="scripts.js"></script>
 </body>
